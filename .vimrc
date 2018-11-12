@@ -1,4 +1,4 @@
-" 更新时间：2018-01-09 16:05:21 by jinhailang
+" 更新时间：2018-11-09 17:32:21 by jinhailang
 
 " 定义快捷键的前缀，即 <Leader>
 let mapleader=";"
@@ -37,17 +37,20 @@ nmap <Leader>WQ :wa<CR>:q<CR>
 " 不做任何保存，直接退出 vim
 nmap <Leader>Q :qa!<CR>
 
+" 临时切换到命令窗口
+nmap <C-z> :sh<CR>
+
 " 设置快捷键遍历子窗口
 " 依次遍历
 nnoremap nw <C-W><C-W>
 " 跳转至右方的窗口
-nnoremap <Leader>lw <C-W>l
-" 跳转至方的窗口
-nnoremap <Leader>hw <C-W>h
+nnoremap <Leader>l <C-W>l
+" 跳转至左方的窗口
+nnoremap <Leader>h <C-W>h
 " 跳转至上方的子窗口
-nnoremap <Leader>kw <C-W>k
+nnoremap <Leader>k <C-W>k
 " 跳转至下方的子窗口
-nnoremap <Leader>jw <C-W>j
+nnoremap <Leader>j <C-W>j
 
 " 定义快捷键在结对符之间跳转
 nmap <Leader>M %
@@ -101,8 +104,8 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'gcmt/wildfire.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'lilydjwg/fcitx.vim'
-Plugin 'fatih/vim-go'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-syntastic/syntastic'
 
 " 插件列表结束
 call vundle#end()
@@ -243,6 +246,12 @@ set nofoldenable
 " <<
 
 " >>
+" 代码跳转
+set tags+=/usr/include/tags
+set tags+=/usr/local/include/tags
+" <<
+
+" >>
 " 内容替换
 
 " 快捷替换
@@ -299,6 +308,12 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
+let NERDTreeMouseMode=2 
+
+" 推出当前 tab
+nmap <Leader>e :tabc<CR>
+
+
 
 " <<
 
@@ -369,3 +384,32 @@ let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 " 跳转到定义处
 map <c-d> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" >>
+" 禁用 swap 文件
+" 禁用 swap 文件
+" 禁用 swap 
+set nobackup       " no backup files
+set noswapfile     " no swap files
+set nowritebackup  " only in case you don't want a backup file while editing
+set noundofile     " no undo files
+
+" pathogen
+execute pathogen#infect()
+
+" vim-syntastic/syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" go
+let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
+
+" lua
+let g:syntastic_lua_checkers = ["luac", "luacheck"]
+let g:syntastic_lua_luacheck_args = "--no-unused-args" 
