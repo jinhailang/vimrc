@@ -106,6 +106,8 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'lilydjwg/fcitx.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'vim-jp/vim-go-extra'
 
 " 插件列表结束
 call vundle#end()
@@ -413,3 +415,6 @@ let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
 " lua
 let g:syntastic_lua_checkers = ["luac", "luacheck"]
 let g:syntastic_lua_luacheck_args = "--no-unused-args" 
+
+" Go 保存时，自动 gofmt
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
