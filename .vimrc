@@ -20,8 +20,8 @@ filetype plugin on
 " vim 自身（非插件）快捷键
 
 " 定义快捷键到行首和行尾
-nmap LB 0
-nmap LE $
+nmap lb 0
+nmap le $
 
 " 设置快捷键将选中文本块复制至系统剪贴板
 vnoremap <Leader>y "+y
@@ -108,6 +108,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'vim-jp/vim-go-extra'
+Plugin 'mzlogin/vim-markdown-toc'
 
 " 插件列表结束
 call vundle#end()
@@ -209,17 +210,17 @@ syntax on
 filetype indent on
 
 " 将制表符扩展为空格
-set expandtab
+" set expandtab
 " 设置编辑时制表符占用空格数
 set tabstop=4
 " 设置格式化时制表符占用空格数
 set shiftwidth=4
-" 让 vim 把连续数量的空格视为一个制表符
+" 按退格键的时候退回缩进的长度
 set softtabstop=4
 
 " 定义不可见字符的显示方式
-" set listchars=tab:>-,trail:-,extends:#,nbsp:-
-" set list
+set listchars=tab:>-,trail:-,extends:#,nbsp:-
+set list
 
 " 设置粘贴模式 <F11>
 set pastetoggle=<F11>
@@ -310,7 +311,7 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
-let NERDTreeMouseMode=2 
+let NERDTreeMouseMode=2
 
 " 推出当前 tab
 nmap <Leader>e :tabc<CR>
@@ -321,7 +322,7 @@ nmap <Leader>e :tabc<CR>
 
 " >>
 " 多文档编辑
- 
+
 " 显示/隐藏 MiniBufExplorer 窗口
 map <Leader>bl :MBEToggle<cr>
 
@@ -350,7 +351,7 @@ map <leader>rs :source my.vim<cr>
 
 " >>
 " 快速选中结对符内的文本
- 
+
 " 快捷键
 map <SPACE> <Plug>(wildfire-fuel)
 vmap <S-SPACE> <Plug>(wildfire-water)
@@ -371,7 +372,7 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
 
 " >>
 " 代码查找
- 
+
 map <c-f> :Ag! ""<left>
 
 " <<
@@ -390,7 +391,7 @@ map <c-d> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " >>
 " 禁用 swap 文件
 " 禁用 swap 文件
-" 禁用 swap 
+" 禁用 swap
 set nobackup       " no backup files
 set noswapfile     " no swap files
 set nowritebackup  " only in case you don't want a backup file while editing
@@ -414,7 +415,16 @@ let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
 
 " lua
 let g:syntastic_lua_checkers = ["luac", "luacheck"]
-let g:syntastic_lua_luacheck_args = "--no-unused-args" 
+let g:syntastic_lua_luacheck_args = "--no-unused-args"
 
 " Go 保存时，自动 gofmt
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
+" 保存时自动删除行尾空格
+autocmd BufWritePre * %s/\s\+$//e
+
+" markdown 生成目录
+" :GenTocGFM or ...
+" let g:vmt_dont_insert_fence = 1
+let g:vmt_list_item_char = '-'
+
