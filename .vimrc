@@ -20,8 +20,11 @@ filetype plugin on
 " vim 自身（非插件）快捷键
 
 " 定义快捷键到行首和行尾
-nmap lb 0
-nmap le $
+nmap jb 0
+nmap je $
+
+" 垂直分割创建窗口，显示的同一文件
+nmap <Leader>nw :sp<CR>
 
 " 设置快捷键将选中文本块复制至系统剪贴板
 vnoremap <Leader>y "+y
@@ -415,7 +418,7 @@ let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
 
 " lua
 let g:syntastic_lua_checkers = ["luac", "luacheck"]
-let g:syntastic_lua_luacheck_args = "--no-unused-args"
+let g:syntastic_lua_luacheck_args = "--no-unused-args --std ngx_lua"
 
 " Go 保存时，自动 gofmt
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
