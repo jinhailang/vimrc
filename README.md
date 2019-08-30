@@ -4,6 +4,8 @@
 
 ## Plugin
 
+插件安装： `:PluginInstall`
+
 > YouCompleteMe
 https://github.com/Valloric/YouCompleteMe
 
