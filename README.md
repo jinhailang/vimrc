@@ -6,7 +6,7 @@
 
 插件安装： `:PluginInstall`
 
-> YouCompleteMe
+- YouCompleteMe
 https://github.com/Valloric/YouCompleteMe
 
 ## 常用命令
